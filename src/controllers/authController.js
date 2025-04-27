@@ -1,5 +1,5 @@
-const { User } = require("../models/user");
-const { sendEmail } = require("../services/emailServices");
+const { User } = require("../models/user.js");
+const { sendEmail } = require("../services/emailServices.js");
 const bcrypt = require('bcryptjs');
 
 const sendVerificationEmail = async (req, res) => {

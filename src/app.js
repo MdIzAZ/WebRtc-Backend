@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
-const { authRoutes } = require('./routes/authRoute')
+const { authRoutes } = require('./routes/authRoute.js')
 const { connectDB } = require('./db')
 
 
