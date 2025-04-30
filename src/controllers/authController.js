@@ -10,6 +10,13 @@ const sendVerificationEmail = async (req, res) => {
     }
 
     try {
+
+        // Check if the email is already registered
+        const existingUser = await User.findOne({email});
+        if(existingUser) {
+            return res.status(400).json({ message: 'User already exists with this email' })
+        }
+
         const verificationCode = Math.floor(100000 + Math.random() * 900000)
         await sendEmail(email, verificationCode)
 
@@ -32,7 +39,6 @@ const verifyCode = async(req, res) => {
     
     if (storedCode && storedCode === parseInt(code)) {
         createUserAccount(req, res, email)
-        // res.status(200).json({ message: 'Email verified successfully' })
     } else {
         res.status(400).json({ message: 'Invalid verification code' })
     }
@@ -62,7 +68,7 @@ const createUserAccount = async(req, res, email) => {
         await newUser.save()
 
         delete req.app.locals[`${email}_code`];
-        res.status(201).json({ message: 'User created successfully' })
+        res.status(201).json({ message: 'User created successfully', userId: newUser._id })
 
     } catch (error) {
         console.error(error);
