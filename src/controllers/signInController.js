@@ -27,14 +27,15 @@ const logInUser = async (req, res) => {
             return res.status(500).json({ message: 'Error generating token' })
         }
 
+        const userObj = user.toObject()
+        delete userObj.password
+
+
+
         res.status(200).json({
             message: 'Login successful',
-            token,
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email
-            }
+            token: token,
+            user: userObj
         })
 
     } catch (error) {
