@@ -5,7 +5,7 @@ const { getAllUsers, getUserById } = require('../controllers/userController');
 
 const router = express.Router()
 router.get('/getAll-users', getAllUsers)
-router.post('/get-user', getUserById)
+router.get('/get-user', getUserById)
 
 exports.userRoutes = router
 
