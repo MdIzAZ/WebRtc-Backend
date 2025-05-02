@@ -1,4 +1,5 @@
 const {Server} = require('socket.io')
+const { Message } = require('../models/Message.js')
 
 
 function setupWebSocketServer(server) {
@@ -11,6 +12,7 @@ function setupWebSocketServer(server) {
 
 
     io.on('connection', (socket) => {
+        
         console.log('New client connected:', socket.id)
 
         socket.on('user-joined', (userData) => {
@@ -23,16 +25,13 @@ function setupWebSocketServer(server) {
             socket.broadcast.emit('user-online', userId)
         })
 
-        socket.on('send-message', ({to, message}) => {
-            console.log('Message sent:', message, 'to:', to)
-            io.to(to).emit('receive-message', message)  
-        })
-
         socket.on('disconnect', () => {
             console.log('Client disconnected:', socket.id)
         })
 
     });
+
+    return io;
 
 
 }

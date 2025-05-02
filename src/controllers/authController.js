@@ -67,8 +67,15 @@ const createUserAccount = async(req, res, email) => {
 
         await newUser.save()
 
+        const userObj = newUser.toObject()
+        delete userObj.password
+
         delete req.app.locals[`${email}_code`];
-        res.status(201).json({ message: 'User created successfully', userId: newUser._id })
+
+        res.status(201).json({ 
+            message: 'User created successfully', 
+            user: userObj
+        })
 
     } catch (error) {
         console.error(error);
