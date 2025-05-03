@@ -16,7 +16,16 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    isOnline: {
+        type: Boolean,
+        default: false
+    },
+    profilePic: {
+        type: String, 
+        default: ''
     }
+
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

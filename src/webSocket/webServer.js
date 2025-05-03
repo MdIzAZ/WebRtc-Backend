@@ -15,19 +15,19 @@ function setupWebSocketServer(server) {
         
         console.log('New client connected:', socket.id)
 
-        socket.on('user-joined', (userData) => {
-            console.log('New user joined:', userData);
-            socket.broadcast.emit('user-joined', userData);
-        });
+        // socket.on('user-joined', (userData) => {
+        //     console.log('New user joined:', userData);
+        //     socket.broadcast.emit('user-joined', userData);
+        // });
 
-        socket.on('user-online', (userId) => {
-            console.log('User online:', userId)
-            socket.broadcast.emit('user-online', userId)
-        })
+        // socket.on('user-online', (userId) => {
+        //     console.log('User online:', userId)
+        //     socket.broadcast.emit('user-online', userId)
+        // })
 
-        socket.on('disconnect', () => {
-            console.log('Client disconnected:', socket.id)
-        })
+        // socket.on('disconnect', () => {
+        //     console.log('Client disconnected:', socket.id)
+        // })
 
     });
 
